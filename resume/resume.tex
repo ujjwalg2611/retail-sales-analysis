@@ -1,0 +1,137 @@
+%-------------------------
+% Resume - Data Analyst (Tableau / Power BI) - Associate
+% Compile with pdfLaTeX
+%-------------------------
+\documentclass[letterpaper,10pt]{article}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+\pagestyle{fancy}\fancyhf{}\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}
+\addtolength{\oddsidemargin}{-0.5in}\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}\addtolength{\topmargin}{-0.55in}\addtolength{\textheight}{1.1in}
+\urlstyle{same}\raggedbottom\raggedright\setlength{\tabcolsep}{0in}\pdfgentounicode=1
+\titleformat{\section}{\vspace{-4pt}\scshape\raggedright\large}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+\newcommand{\resumeItem}[1]{\item\small{#1 \vspace{-2pt}}}
+\newcommand{\resumeSubheading}[4]{\vspace{-2pt}\item
+  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\ \textit{\small #3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-7pt}}
+\newcommand{\resumeProjectHeading}[2]{\item
+  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}\small #1 & \small #2 \\ \end{tabular*}\vspace{-7pt}}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in,label={},topsep=2pt,itemsep=1pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.18in,label=\textbullet,topsep=2pt,itemsep=1pt,parsep=0pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+\begin{center}
+  \textbf{\Huge \scshape Ujjwal Gupta}\\ \vspace{2pt}\small
+  +91-9719564851 $|$ \href{mailto:ujjwalgupta2611@gmail.com}{ujjwalgupta2611@gmail.com} $|$
+  \href{https://www.linkedin.com/in/ujjwal-gupta-5947b5321/}{LinkedIn} $|$
+  \href{https://github.com/ujjwalg2611}{GitHub}
+\end{center}
+\vspace{-10pt}
+
+\section{Professional Summary}
+\small{Computer Science undergraduate at NIT Jalandhar with project experience in Python, SQL,
+data cleaning and validation, exploratory analysis, and dashboard development. Skilled in turning
+raw data into clean, reliable datasets and clear reporting. Seeking a data analyst role focused on
+data quality, reporting, and visualization.}
+
+\section{Education}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {National Institute of Technology, Jalandhar}{Jalandhar, India}
+    {B.Tech. in Computer Science and Engineering $|$ CGPA: 8.07/10}{Aug. 2024 -- May 2028}
+\resumeSubHeadingListEnd
+
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in,label={},topsep=1pt,itemsep=1pt]
+\small\item{
+  \textbf{Programming \& Query Languages:} Python, SQL, C++, JavaScript, TypeScript \\
+  \textbf{Data Analysis \& Quality:} Data Cleaning, Data Validation, Data Quality Checks,
+  Exploratory Data Analysis, Performance Metrics, Anomaly Detection (z-score) \\
+  \textbf{Data Visualization:} Matplotlib, Seaborn, HTML/JavaScript dashboards
+  % ADD ONLY AFTER BUILDING: , Power BI, DAX  (or Tableau)
+  \\
+  \textbf{Databases:} PostgreSQL, Supabase, SQLite, Schema Design, Indexing, Query Optimization, pgvector \\
+  \textbf{Analytics \& AI:} Machine Learning (Regression, Classification), LLMs, Embeddings,
+  Vector Search, Fraud Detection, Risk Decisioning \\
+  % VERIFY: keep AWS and Linux/Bash only if you can discuss real use.
+  \textbf{Tools:} Pandas, Jupyter Notebook, Git, GitHub, AWS, Linux/Bash \\
+  \textbf{Additional:} Flask, REST APIs, DBMS, Data Structures and Algorithms
+}
+\end{itemize}
+\vspace{-5pt}
+
+\section{Projects}
+\resumeSubHeadingListStart
+
+  \resumeProjectHeading
+    {\textbf{Retail Sales Data Quality \& Dashboard} $|$
+    \emph{Python, SQL (SQLite), Pandas, Matplotlib, Seaborn, JavaScript}}
+    {\href{https://github.com/ujjwalg2611/retail-sales-analysis}{GitHub}}
+  \resumeItemListStart
+    \resumeItem{Built a data-cleaning pipeline on a 12,240-record synthetic retail dataset; audited and
+    resolved duplicates, missing values, invalid prices, and outliers (454 records, 3.7\%, removed).}
+    \resumeItem{Wrote SQL queries for monthly revenue, category share, and regional performance;
+    flagged anomalous months using z-score analysis.}
+    % --- CURRENT (true) bullet: ---
+    \resumeItem{Built an interactive HTML/JavaScript dashboard (category and region filters, KPIs,
+    anomaly-highlighted trend, data-quality summary) with a reproducible, documented repo.}
+    % --- AFTER you build it in Power BI, REPLACE the bullet above with: ---
+    % \resumeItem{Built an interactive Power BI dashboard with DAX measures (revenue, AOV,
+    % z-score anomaly flag), slicers, and a data-quality page on the cleaned dataset.}
+  \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{BioShield-UPI} $|$ \emph{Python, Flask, DeepFace, PostgreSQL, JWT}}
+    {\href{https://github.com/ujjwalg2611/BioShield-UPI}{GitHub} $|$
+     \href{https://bioshield-upi.onrender.com/}{Demo}}
+  \resumeItemListStart
+    \resumeItem{Developed a data-driven authentication and fraud detection system combining keystroke
+    dynamics and facial recognition for UPI transaction risk analysis.}
+    % VERIFY: event count and feature count must match your dataset.
+    \resumeItem{Evaluated 1,000+ authentication events using 6 features per session, achieving
+    85\%+ recognition accuracy.}
+    % VERIFY: be ready to explain how these were measured (data, baseline, simulated vs. real).
+    \resumeItem{Implemented configurable ALLOW/OTP/BLOCK risk rules; project testing reported a
+    90\% reduction in fraudulent transaction attempts and a 95\% reduction in unauthorized access.}
+  \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{AI Job Intelligence Platform} $|$
+    \emph{TypeScript, Next.js, React, PostgreSQL, Supabase, pgvector}}{}
+  \resumeItemListStart
+    \resumeItem{Built a data-driven platform that processes job descriptions and candidate profiles
+    for semantic matching and relevance-based retrieval.}
+    \resumeItem{Integrated LLMs, embeddings, and vector search for information retrieval,
+    categorization, and AI-powered matching.}
+    \resumeItem{Designed database schemas and optimized SQL-backed retrieval through indexing
+    and query optimization.}
+  \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\section{Certifications}
+\begin{itemize}[leftmargin=0.15in,label={},topsep=1pt,itemsep=1pt]
+\small\item{\textbf{Machine Learning Specialization} -- DeepLearning.AI and Stanford University (Coursera)}
+\end{itemize}
+\vspace{-5pt}
+
+\section{Achievements}
+\begin{itemize}[leftmargin=0.15in,label={},topsep=1pt,itemsep=1pt]
+\small\item{
+  \textbf{JEE Main 2024:} Top 0.9\% among approximately 1.2 million candidates; qualified for JEE Advanced. \\
+  \textbf{LeetCode:} \href{https://leetcode.com/u/guptaji2611/}{550+ problems solved}; rating 1560+ (Top 25\%). \\
+  \textbf{SOF International Mathematics Olympiad:} School-level Gold Medal.
+  \href{https://drive.google.com/file/d/1R3uK1vuTV5cOm1Q08Nf9VLYCNRTqqGld/view?pli=1}{Certificate}
+}
+\end{itemize}
+\end{document}

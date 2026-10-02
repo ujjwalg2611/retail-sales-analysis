@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Retail Sales Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--tx:#1b1f24;--mu:#5d6773;--ac:#2563eb;--bd:#e2e6ea;--warn:#fff4d6;--wt:#6b4e00;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14171a;--card:#1d2226;--tx:#e8ebee;--mu:#9aa5b1;--ac:#6ea0ff;--bd:#2c343a;--warn:#3a2f10;--wt:#f2d98a}}
+:root[data-theme="dark"]{--bg:#14171a;--card:#1d2226;--tx:#e8ebee;--mu:#9aa5b1;--ac:#6ea0ff;--bd:#2c343a;--warn:#3a2f10;--wt:#f2d98a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:0 0 4px}h2{font-size:14px;margin:0 0 10px}
+.note{background:var(--warn);color:var(--wt);padding:8px 12px;border-radius:8px;margin:10px 0;font-size:13px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+select{background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:6px 8px;font:inherit}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.kpis{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px;min-width:0}
+.kpi b{display:block;font-size:22px}.kpi span{color:var(--mu);font-size:12px}
+.cols{display:flex;align-items:flex-end;gap:4px;height:150px}
+.col{flex:1;background:var(--ac);border-radius:3px 3px 0 0;min-height:2px;position:relative}
+.col.hi{opacity:.55}
+.lbl{display:flex;gap:4px;margin-top:4px}.lbl i{flex:1;text-align:center;font-style:normal;font-size:10px;color:var(--mu)}
+.row{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px}
+.row .n{width:110px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .t{flex:1;background:var(--bd);border-radius:4px;height:12px}.row .f{background:var(--ac);height:100%;border-radius:4px}
+.row .v{width:62px;text-align:right;flex:none;color:var(--mu)}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:5px 4px;border-bottom:1px solid var(--bd);text-align:left}
+.sc{overflow-x:auto}.r{text-align:right}
+</style></head><body><main>
+<h1>Retail Sales Dashboard — 2024</h1>
+<div class="note"><b>Synthetic data.</b> Generated for demonstrating a data-cleaning and analytics pipeline; not real business results.</div>
+<div class="bar"><label>Category <select id="fc"></select></label><label>Region <select id="fr"></select></label></div>
+<div class="kpis" id="kpis"></div>
+<div class="grid" style="margin-top:12px">
+ <div class="card" style="grid-column:1/-1"><h2>Monthly revenue <small style="color:var(--mu)">(highlighted = |z| &gt; 1)</small></h2><div class="cols" id="mon"></div><div class="lbl" id="monl"></div></div>
+ <div class="card"><h2>Revenue by category</h2><div id="cat"></div></div>
+ <div class="card"><h2>Revenue by region</h2><div id="reg"></div></div>
+ <div class="card"><h2>Top 5 products</h2><div class="sc"><table id="top"></table></div></div>
+ <div class="card"><h2>Data quality (cleaning step)</h2><div class="sc"><table id="dq"></table></div></div>
+</div>
+</main>
+<script>
+const D=__DATA__;
+const fm=n=>n>=1e6?(n/1e6).toFixed(2)+"M":n>=1e3?(n/1e3).toFixed(1)+"K":n.toFixed(0);
+const uniq=k=>[...new Set(D.rows.map(r=>r[k]))].sort();
+const $=id=>document.getElementById(id);
+for(const [id,k,all] of [["fc","category","All categories"],["fr","region","All regions"]]){
+  $(id).innerHTML=`<option value="">${all}</option>`+uniq(k).map(v=>`<option>${v}</option>`).join("");
+  $(id).onchange=render;}
+function group(rows,k){const m={};rows.forEach(r=>{m[r[k]]=(m[r[k]]||0)+r.revenue});return Object.entries(m).sort((a,b)=>b[1]-a[1]);}
+function bars(id,rows,k){const g=group(rows,k),mx=Math.max(...g.map(x=>x[1]),1);
+  $(id).innerHTML=g.map(([n,v])=>`<div class="row"><span class="n">${n}</span><span class="t"><div class="f" style="width:${v/mx*100}%"></div></span><span class="v">${fm(v)}</span></div>`).join("");}
+function render(){
+  const c=$("fc").value,g=$("fr").value;
+  const rows=D.rows.filter(r=>(!c||r.category==c)&&(!g||r.region==g));
+  const rev=rows.reduce((s,r)=>s+r.revenue,0),ord=rows.reduce((s,r)=>s+r.orders,0);
+  $("kpis").innerHTML=[["Revenue",fm(rev)],["Orders",ord.toLocaleString()],["Avg order value",ord?fm(rev/ord):"-"]]
+   .map(([l,v])=>`<div class="card kpi"><b>${v}</b><span>${l}</span></div>`).join("");
+  const mm=group(rows,"month").sort((a,b)=>a[0]<b[0]?-1:1),vals=mm.map(x=>x[1]);
+  const mean=vals.reduce((a,b)=>a+b,0)/(vals.length||1),sd=Math.sqrt(vals.reduce((a,b)=>a+(b-mean)**2,0)/((vals.length-1)||1))||1,mx=Math.max(...vals,1);
+  $("mon").innerHTML=mm.map(([m,v])=>`<div class="col ${Math.abs((v-mean)/sd)>1?"hi":""}" style="height:${v/mx*100}%" title="${m}: ${fm(v)}"></div>`).join("");
+  $("monl").innerHTML=mm.map(([m])=>`<i>${m.slice(5)}</i>`).join("");
+  bars("cat",rows,"category");bars("reg",rows,"region");
+  const tp=group(rows,"product").slice(0,5);
+  $("top").innerHTML="<tr><th>Product</th><th class='r'>Revenue</th></tr>"+tp.map(([n,v])=>`<tr><td>${n}</td><td class="r">${fm(v)}</td></tr>`).join("");
+}
+const q=D.dq,lab={raw_rows:"Raw records",duplicate_rows:"Duplicates removed",missing_quantity:"Missing quantity (removed)",negative_prices:"Negative prices (removed)",price_outliers_removed:"Price outliers (removed)",missing_region:"Missing region (set Unknown)",inconsistent_category_case:"Category casing fixed",clean_rows:"Clean records"};
+$("dq").innerHTML=Object.keys(lab).map(k=>`<tr><td>${lab[k]}</td><td class="r">${q[k].toLocaleString()}</td></tr>`).join("");
+render();
+</script></body></html>

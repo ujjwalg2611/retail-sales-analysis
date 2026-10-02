@@ -1,0 +1,9 @@
+check,count
+Raw records,12240
+Duplicates removed,221
+Missing quantity (removed),150
+Negative prices (removed),60
+Price outliers (removed),25
+Missing region (set to Unknown),300
+Category casing fixed,200
+Clean records,11786

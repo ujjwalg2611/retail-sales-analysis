@@ -21,8 +21,14 @@ casing). Results demonstrate the *method*; they are not real business findings.
 - Defects found: 221 duplicates, 300 missing regions, 150 missing quantities, 60 negative prices,
   200 inconsistent category labels, 25 price outliers.
 
+## Dashboard
+`python build_dashboard.py` builds `dashboard.html`: a self-contained interactive dashboard (category/region filters, KPIs, monthly trend with z-score highlighting, top products, data-quality summary). Open it in any browser; no server or libraries needed.
+
+## Power BI / Tableau
+See `powerbi/POWERBI_GUIDE.md` for DAX measures and a page-by-page build guide using `powerbi/clean_retail_sales.csv`.
+
 ## Run
 ```
 pip install pandas matplotlib seaborn
-python generate_data.py && python analysis.py
+python generate_data.py && python analysis.py && python build_dashboard.py
 ```
