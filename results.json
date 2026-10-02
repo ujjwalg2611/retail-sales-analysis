@@ -1,0 +1,35 @@
+{
+  "raw_rows": 12240,
+  "duplicate_rows": 221,
+  "missing_region": 300,
+  "missing_quantity": 150,
+  "negative_prices": 60,
+  "inconsistent_category_case": 200,
+  "price_outliers_removed": 25,
+  "clean_rows": 11786,
+  "rows_removed_total": 454,
+  "total_revenue": 60381176.88,
+  "aov": 5123.13,
+  "q4_share_pct": 24.5,
+  "top_category": {
+    "category": "Clothing",
+    "revenue": 22180358.2,
+    "share_pct": 36.7
+  },
+  "top_product": {
+    "product": "Jacket",
+    "category": "Clothing",
+    "revenue": 8710513.24
+  },
+  "top_region": {
+    "region": "North",
+    "revenue": 15277478.74
+  },
+  "peak_month": "2024-03",
+  "lowest_month": "2024-02",
+  "months_abs_z_gt_1": [
+    "2024-02",
+    "2024-03",
+    "2024-11"
+  ]
+}
